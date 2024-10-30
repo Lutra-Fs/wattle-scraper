@@ -1,10 +1,41 @@
 /**
- * Script for selectively downloading course materials from a web page.
- * This script allows users to list, select, and download items based on a custom filter.
+ *   Script for selectively downloading course materials from a web page.
+ *   This script allows users to list, select, and download items based on a custom filter.
+ *   Copyright (C) 2024 Bo Zhang (Github: @Lutra-Fs)
+
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 // Cache for storing download attempts
 let downloadAttempts = new Map();
+
+/**
+ * Prints the copyright and license information.
+ */
+function printLicenseInfo() {
+    console.log(`
+    Script for selectively downloading course materials from a web page.
+    Copyright (C) 2024 Bo Zhang (Github: @Lutra-Fs)
+    
+    This program comes with ABSOLUTELY NO WARRANTY;
+    This is free software, and you are welcome to redistribute it
+    under certain conditions;
+    `);
+}
+
+// Print license information at the start of the script
+printLicenseInfo();
 
 /**
  * Lists all items matching the filter and provides instructions for downloading.
@@ -40,7 +71,7 @@ async function listAndDownloadItems(filter) {
  */
 function parseSelection(selection, maxIndex, filter) {
     if (selection.toLowerCase() === 'all') {
-        return Array.from({length: maxIndex}, (_, i) => i);
+        return Array.from({ length: maxIndex }, (_, i) => i);
     }
     if (selection.toLowerCase() === 'failed') {
         return Array.from(downloadAttempts.entries())
@@ -73,7 +104,7 @@ function parseSelection(selection, maxIndex, filter) {
  */
 async function downloadSelected(selection, filter) {
     const items = document.querySelectorAll('.activity-item');
-    
+
     let filteredItems;
 
     if (filter.toLowerCase() === 'pdf') {
@@ -114,11 +145,11 @@ async function downloadSelected(selection, filter) {
                 } else {
                     url = new URL(link.href);
                 }
-                
+
                 url.searchParams.set('redirect', '1');
-                
+
                 console.log(`Attempting to download: ${activityName}`);
-                
+
                 const a = document.createElement('a');
                 a.href = url.toString();
                 a.download = activityName.replace(/[/\\?%*:|"<>]/g, '-') + '.pdf';
@@ -126,12 +157,12 @@ async function downloadSelected(selection, filter) {
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                
+
                 console.log(`Download initiated for: ${activityName}`);
-                
+
                 // Update cache
                 downloadAttempts.set(`${index + 1}-${filter}`, 0);
-                
+
                 // Random delay between 5 to 10 seconds
                 const randomDelay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
                 await delay(randomDelay);
