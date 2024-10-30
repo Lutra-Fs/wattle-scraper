@@ -106,8 +106,9 @@ async function downloadSelected(selection, filter) {
     const items = document.querySelectorAll('.activity-item');
 
     let filteredItems;
-
+    // TODO: Recursively handle the folder structure
     if (filter.toLowerCase() === 'pdf') {
+        // TODO: Add support for other file types
         // 过滤出所有 PDF 文件
         filteredItems = Array.from(items).filter(item => {
             const resourcelinkdetails = item.querySelector('.resourcelinkdetails');
