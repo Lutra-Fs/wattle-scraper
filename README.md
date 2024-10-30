@@ -100,4 +100,19 @@ Feel free to submit issues and enhancement requests through the repository's iss
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is licensed under the GNU General Public License v3.0 (GPLv3). This means:
+
+### What you can do:
+- ✅ Use the software for any purpose
+- ✅ Study how the software works and modify it
+- ✅ Redistribute copies of the original software
+- ✅ Distribute your modified versions of the software
+
+### What you must do:
+- 📢 License any derivatives under GPLv3
+- 📝 State significant changes made to the software
+- 📋 Include original copyright and license notices
+- 📦 Make source code available when distributing
+- ⚠️ Include a copy of the full license text
+
+For the full license text, see [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
